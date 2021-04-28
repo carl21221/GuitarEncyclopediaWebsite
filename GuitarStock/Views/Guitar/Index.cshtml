@@ -1,0 +1,81 @@
+﻿@model IEnumerable<GuitarStock.Models.GuitarViewModel>
+@using Microsoft.AspNetCore.Http;
+@using GuitarStock.Util
+@inject IHttpContextAccessor IHCA
+
+@{
+    ViewData["Title"] = "Guitars";
+}
+
+<h2 class="text-dark text-lg-center">Guitars</h2>
+<div class="container-fluid row">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-dark" style="width:33%" asp-area="" asp-controller="Guitar" asp-action="Search">Search</a>
+        <a class="btn btn-dark" style="width:33%" asp-area="" asp-controller="Guitar" asp-action="Compare">Compare</a>
+        <a class="btn btn-dark" style="width:33%" asp-area="" asp-controller="Guitar" asp-action="Create">Add</a>
+    }
+    else
+    {
+        <a class="btn btn-dark" style="width:49%" asp-area="" asp-controller="Guitar" asp-action="Search">Search</a>
+        <a class="btn btn-dark" style="width:49%" asp-area="" asp-controller="Guitar" asp-action="Compare">Compare</a>
+    }
+</div>
+
+<div class="container-fluid row">
+    @if (Model.Count() > 0)
+    {
+        @foreach (var guitar in Model)
+        {
+            <div class="card col-auto p-1 m-1 bg-dark text-white" style="width: 32%; max-height: 600px">
+                @{ if (guitar.Images.Count() > 0)
+                    {
+                        <img class="card-img-top" style="min-width: 100px; width: 100%; height: 55%; min-height:200px" src="~/@guitar.Images.First().URL" alt="Guitar Image">
+                    }
+                    else
+                    {
+                        <img class="card-img-top" alt="No image to show">
+                    }
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@guitar.Guitar.Brand @guitar.Guitar.Model </h5>
+                    <p class="card-text">
+                        Color: @guitar.Guitar.Color<br />
+                        Body Material: @guitar.Guitar.BodyMaterial<br />
+                        Pickup Config: @guitar.Guitar.PickupConfiguration<br />
+                    </p>
+                </div>
+                <div class="card-footer flex-row">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-primary" style="width:32%" asp-controller="Guitar" asp-action="Details" asp-route-Id="@guitar.Guitar.Id">Details</a>
+                        <a class="btn btn-secondary" style="width:32%" asp-controller="Guitar" asp-action="Edit" asp-route-Id="@guitar.Guitar.Id">Edit</a>
+                        <a class="btn btn-danger" style="width:32%" asp-controller="Guitar" asp-action="Delete" asp-route-Id="@guitar.Guitar.Id">Delete</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" style="width:100%" asp-controller="Guitar" asp-action="Details" asp-route-Id="@guitar.Guitar.Id">Details</a>
+                    }
+                    @{
+                        var sesh = IHCA.HttpContext.Session.Get<GuitarComparisonViewModel>(SiteConstants.SessionName);
+                        <form method="post">
+                            @{ if (sesh != null && sesh.IsInComparison(guitar.Guitar.Id))
+                                {
+                                    <button type="submit" class="btn btn-info" style="width: 100%" asp-controller="Guitar" asp-action="RemoveFromComparison" asp-route-Id="@guitar.Guitar.Id">Remove From Compare</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-info" style="width: 100%" asp-controller="Guitar" asp-action="AddToComparison" asp-route-Id="@guitar.Guitar.Id">Add To Compare</button>
+                                }
+                            }
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    { <p>No guitars found</p>}
+</div>
+

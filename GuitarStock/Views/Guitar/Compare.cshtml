@@ -1,0 +1,85 @@
+﻿@model GuitarStock.Models.GuitarComparisonViewModel
+@using Microsoft.AspNetCore.Http;
+@using GuitarStock.Util
+@inject IHttpContextAccessor IHCA
+
+@{
+    ViewData["Title"] = "Compare";
+}
+
+<h2 class="text-dark text-lg-center">Compare</h2>
+<div class="row justify-content-center">
+    @{
+        var thisSession = IHCA.HttpContext.Session.Get<GuitarComparisonViewModel>(SiteConstants.SessionName);
+
+
+        if (thisSession.IsEmpty())
+        {
+            <p class="text-lg-center">You have no guitars to compare. </p> <p class="text-lg-center"> <a asp-controller="Guitar" asp-action="Index">Click here</a> to browse guitars.</p>
+        }
+        else if (thisSession.Count() == 1)
+        {
+
+            <table class="table-bordered table-striped w-100">
+                <thead>
+                    <tr>
+                        <th style="min-width: 33%">@thisSession.Guitar1.Guitar.Brand @thisSession.Guitar1.Guitar.Model</th>
+                        <th style="min-width: 33%"></th>
+                        <th style="min-width: 33%"> No Guitar Selected </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>@thisSession.Guitar1.Guitar.Color</td><td>Color</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.FretboardMaterial</td><td>Fretboard Material</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.BodyMaterial</td><td>Body Material</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.NeckJoint</td><td>Neck Joint</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.StringCount</td><td>String Count</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.FretSize</td><td>Fret Size</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.InlayStyle</td><td>Inlay Style</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.Binding</td><td>Binding</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.PickupConfiguration</td><td>Pickup Configuration</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.BridgePickup</td><td>Bridge Pickup</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.MiddlePickup</td><td>Middle Pickup</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.NeckPickup</td><td>Neck Pickup</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.PickupSwitch</td><td>Pickup Switch</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.BridgeType</td><td>Bridge</td><td> - - -</td></tr>
+                    <tr><td>@thisSession.Guitar1.Guitar.ReleaseDate</td><td>Release Date</td><td> - - -</td></tr>
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+<table class="table-bordered table-striped w-100">
+    <thead class="text-center">
+        <tr >
+            <th style="min-width: 33%">@thisSession.Guitar1.Guitar.Brand @thisSession.Guitar1.Guitar.Model</th>
+            <th style="min-width: 33%"></th>
+            <th style="min-width: 33%"> @thisSession.Guitar2.Guitar.Brand @thisSession.Guitar2.Guitar.Model</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr><td>@thisSession.Guitar1.Guitar.Color</td><td>Color</td><td>@thisSession.Guitar2.Guitar.Color</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.FretboardMaterial</td><td>Fretboard Material</td><td>@thisSession.Guitar2.Guitar.FretboardMaterial</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.BodyMaterial</td><td>Body Material</td><td>@thisSession.Guitar2.Guitar.BodyMaterial</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.NeckJoint</td><td>Neck Joint</td><td>@thisSession.Guitar2.Guitar.NeckJoint</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.StringCount</td><td>String Count</td><td>@thisSession.Guitar2.Guitar.StringCount</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.FretSize</td><td>Fret Size</td><td>@thisSession.Guitar2.Guitar.FretSize</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.InlayStyle</td><td>Inlay Style</td><td>@thisSession.Guitar2.Guitar.InlayStyle</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.Binding</td><td>Binding</td><td>@thisSession.Guitar2.Guitar.Binding</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.PickupConfiguration</td><td>Pickup Configuration</td><td>@thisSession.Guitar2.Guitar.PickupConfiguration</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.BridgePickup</td><td>Bridge Pickup</td><td>@thisSession.Guitar2.Guitar.BridgePickup</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.MiddlePickup</td><td>Middle Pickup</td><td>@thisSession.Guitar2.Guitar.MiddlePickup</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.NeckPickup</td><td>Neck Pickup</td><td>@thisSession.Guitar2.Guitar.NeckPickup</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.PickupSwitch</td><td>Pickup Switch</td><td>@thisSession.Guitar2.Guitar.PickupSwitch</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.BridgeType</td><td>Bridge</td><td>@thisSession.Guitar2.Guitar.BridgeType</td></tr>
+        <tr><td>@thisSession.Guitar1.Guitar.ReleaseDate</td><td>Release Date</td><td>@thisSession.Guitar2.Guitar.ReleaseDate</td></tr>
+        <tr>
+        <td class="test-center"><a class="btn btn-dark w-100" asp-controller="Guitar" asp-action="Details" asp-route-Id=@thisSession.Guitar1.Guitar.Id>Go To Details</a></td>
+        <td></td>
+        <td class="test-center"><a class="btn btn-dark w-100" asp-controller="Guitar" asp-action="Details" asp-route-Id=@thisSession.Guitar2.Guitar.Id>Go To Details</a></td></tr>
+    </tbody>
+</table>
+        }
+    }
+</div>

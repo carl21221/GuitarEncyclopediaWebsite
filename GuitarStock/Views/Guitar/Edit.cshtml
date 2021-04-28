@@ -1,0 +1,145 @@
+﻿@model GuitarStock.Models.GuitarViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container col-sm">
+    <h1 class="text-md-center">Edit Guitar</h1>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form method="post" asp-action="Edit">
+
+        <div hidden>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.Id">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.Model">Guitar Model:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.Model">
+            <span asp-validation-for="@Model.Guitar.Model" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.Brand">Guitar Brand:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.Brand">
+            <span asp-validation-for="@Model.Guitar.Brand" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.Color">Guitar Color:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.Color">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.FretboardMaterial">Fretboard Material:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.FretboardMaterial">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.BodyMaterial">Body Material:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.BodyMaterial">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.NeckJoint">Neck Joint:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.NeckJoint">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.StringCount">String Count:</label>
+            <input type="number" max="12" min="6" class="form-control" asp-for="@Model.Guitar.StringCount">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.FretCount">Fret Count:</label>
+            <input type="number" class="form-control" asp-for="@Model.Guitar.FretCount">
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Guitar.FretSize>Fret Size:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.FretSize">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.InlayStyle">Inlay Style:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.InlayStyle">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.Binding">Binding:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.Binding">
+        </div>
+
+        <h1 class="text-md-center">Electronics</h1>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.PickupConfiguration">Pickup Configuration:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.PickupConfiguration">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.BridgePickup">Bridge:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.BridgePickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.MiddlePickup">Middle:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.MiddlePickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.NeckPickup">Neck:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.NeckPickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.PickupSwitch">Pickup Selector Type:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.PickupSwitch">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.ReleaseDate">Release Date:</label>
+            <input type="date" class="form-control" asp-for="@Model.Guitar.ReleaseDate">
+        </div>
+
+        <h1 class="text-md-center"> Hardware </h1>
+
+        <div class="form-group">
+            <label asp-for="@Model.Guitar.BridgeType">Bridge Type:</label>
+            <input type="text" class="form-control" asp-for="@Model.Guitar.BridgeType">
+        </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary w-50 text-center" asp-action="Edit">Submit</button>
+            <a class="btn btn-dark w-50 text-center" asp-action="Index">Back</a>
+        </div>
+    </form>
+    <br /><br />
+    <h1 class="text-md-center bg-dark text-white p-2">Upload an Image</h1>
+    <form method="post" enctype="multipart/form-data" asp-controller="Guitar" asp-action="UploadFile" asp-route-Id="@Model.Guitar.Id">
+        <div class="form-group">
+            <input type="file" name="files" style="width: 100%" />
+        </div>
+        <div class="form-group text-center">
+                <input type="submit" value="Upload" class="btn btn-dark w-50" />
+        </div>
+    </form>
+
+    <div class="text-md-center">Current images</div>
+    <table class="table table-borderless mw-100">
+        <tr>
+            @{ foreach (Image i in Model.Images)
+                {
+                    <td><img src="~/@i.URL" alt=@i.URL class="p-2" style="width: 100%"></td>
+                }
+            }
+        </tr>
+    </table>
+
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

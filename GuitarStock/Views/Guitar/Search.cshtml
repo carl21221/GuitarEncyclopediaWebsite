@@ -1,0 +1,21 @@
+﻿@model GuitarStock.Models.SearchModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h2 class="text-dark text-lg-center">Search</h2><br />
+<form method="post" asp-controller="Guitar" asp-action="Search">
+    <div class="form-group">
+        <label name="searchTerm">Search Term:</label>
+        <input type="text" class="form-control" asp-for="@Model.SearchTerm" name="searchTerm" required>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.SearchProperty" name="searchTerm">Search Area:</label>
+        <select asp-for="@Model.SearchProperty">
+            <option value="MODEL">Model</option>
+            <option value="BRAND">Brand</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-dark" asp-for="">Search</button>
+</form>

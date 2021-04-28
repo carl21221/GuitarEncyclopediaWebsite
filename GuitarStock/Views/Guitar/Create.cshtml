@@ -1,0 +1,124 @@
+﻿@model GuitarStock.Models.Guitar
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<div class="container col-sm">
+    <div class="text-center">
+        <h1 class="display-4">Add a Guitar</h1>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form method="post" asp-action="Create">
+
+        <div class="form-group">
+            <label asp-for="Model">Guitar Model:</label>
+            <input type="text" class="form-control" asp-for="Model">
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Brand">Guitar Brand:</label>
+            <input type="text" class="form-control" asp-for="Brand">
+            <span asp-validation-for="Brand" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Color">Guitar Color:</label>
+            <input type="text" class="form-control" asp-for="Color">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FretboardMaterial">Fretboard Material:</label>
+            <input type="text" class="form-control" asp-for="FretboardMaterial">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BodyMaterial">Body Material:</label>
+            <input type="text" class="form-control" asp-for="BodyMaterial">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NeckJoint">Neck Joint:</label>
+            <input type="text" class="form-control" asp-for="NeckJoint">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StringCount">String Count:</label>
+            <input type="number" max="12" min="6" class="form-control" asp-for="StringCount">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FretCount">Fret Count:</label>
+            <input type="number" class="form-control" asp-for="FretCount">
+        </div>
+
+        <div class="form-group">
+            <label asp-for=FretSize>Fret Size:</label>
+            <input type="text" class="form-control" asp-for="FretSize">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="InlayStyle">Inlay Style:</label>
+            <input type="text" class="form-control" asp-for="InlayStyle">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Binding">Binding:</label>
+            <input type="text" class="form-control" asp-for="Binding">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ReleaseDate"> ReleaseDate: </label>
+            <input type="text" class="form-control" asp-for="ReleaseDate" />
+        </div>
+
+        <h1> Electronics </h1> <br>
+
+        <div class="form-group">
+            <label asp-for="PickupConfiguration">Pickup Configuration:</label>
+            <input type="text" class="form-control" asp-for="PickupConfiguration">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BridgePickup">Bridge Pickup:</label>
+            <input type="text" class="form-control" asp-for="BridgePickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MiddlePickup">Middle Pickup:</label>
+            <input type="text" class="form-control" asp-for="MiddlePickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NeckPickup">Neck Pickup:</label>
+            <input type="text" class="form-control" asp-for="NeckPickup">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PickupSwitch">Pickup Selector Type:</label>
+            <input type="text" class="form-control" asp-for="PickupSwitch">
+        </div>
+
+        <h1> Hardware </h1> <br>
+
+        <div class="form-group">
+            <label asp-for="BridgeType">Bridge Type:</label>
+            <input type="text" class="form-control" asp-for="BridgeType">
+        </div>
+
+        <div class="col-2 ">
+            <button type="submit" class="btn btn-primary w-100">Create</button>
+            <a class="btn btn-dark w-100" asp-action="Index">Back</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

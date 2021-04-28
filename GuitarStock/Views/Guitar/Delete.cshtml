@@ -1,0 +1,35 @@
+﻿@model GuitarStock.Models.Guitar
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="col-6">
+    <h2 class="text-primary">Delete?</h2>
+</div>
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <tbody>
+            <tr><td>Model</td><td>@Model.Model</td></tr>
+            <tr><td>Brand</td><td>@Model.Brand</td></tr>
+            <tr><td>Color</td><td>@Model.Color</td></tr>
+            <tr><td>Fretboard Material</td><td>@Model.FretboardMaterial</td></tr>
+            <tr><td>Body Material</td><td>@Model.BodyMaterial</td></tr>
+            <tr><td>Neck Joint</td><td>@Model.NeckJoint</td></tr>
+            <tr><td>String Count</td><td>@Model.StringCount</td></tr>
+            <tr><td>Fret Size</td><td>@Model.FretSize</td></tr>
+            <tr><td>Inlay Style</td><td>@Model.InlayStyle</td></tr>
+            <tr><td>Binding</td><td>@Model.Binding</td></tr>
+            <tr><td>Pickup Configuration</td><td>@Model.PickupConfiguration</td></tr>
+            <tr><td>Bridge Pickup</td><td>@Model.BridgePickup</td></tr>
+            <tr><td>Middle Pickup</td><td>@Model.MiddlePickup</td></tr>
+            <tr><td>Neck Pickup</td><td>@Model.NeckPickup</td></tr>
+            <tr><td>Pickup Switch</td><td>@Model.PickupSwitch</td></tr>
+            <tr><td>Bridge</td><td>@Model.BridgeType</td></tr>
+            <tr><td>Release Date</td><td>@Model.ReleaseDate</td></tr>
+        </tbody>
+    </table>
+    <input type="submit" class="btn btn-danger" value="Confirm Deletion"/>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>
